@@ -332,12 +332,52 @@ function ProductsPanel() {
               </div>
             </Field>
             <Field label="Download file URL (for free / $0 products)">
-              <input
-                value={fileUrl}
-                onChange={(e) => setFileUrl(e.target.value)}
-                placeholder="https://…/file.stl"
-                className="w-full border border-line bg-ink px-3 py-2 text-sm text-paper outline-none focus:border-accent"
-              />
+              <div className="space-y-2">
+                <input
+                  value={fileUrl}
+                  onChange={(e) => setFileUrl(e.target.value)}
+                  placeholder="https://…/file.stl"
+                  className="w-full border border-line bg-ink px-3 py-2 text-sm text-paper outline-none focus:border-accent"
+                />
+                <div>
+                  <input
+                    type="file"
+                    accept=".stl,.zip"
+                    id="download-file-upload"
+                    className="hidden"
+                    onChange={async (e) => {
+                      const f = e.target.files?.[0];
+                      if (!f) return;
+                      setUploading(true);
+                      try {
+                        const body = new FormData();
+                        body.append("file", f);
+                        const res = await fetch("/api/upload", {
+                          method: "POST",
+                          body,
+                        });
+                        const data = await res.json();
+                        if (!res.ok)
+                          throw new Error(data.error || "Upload failed");
+                        setFileUrl(data.url);
+                      } catch (err) {
+                        alert(
+                          err instanceof Error ? err.message : "Upload failed"
+                        );
+                      } finally {
+                        setUploading(false);
+                        e.target.value = "";
+                      }
+                    }}
+                  />
+                  <label
+                    htmlFor="download-file-upload"
+                    className="inline-block cursor-pointer border border-line px-3 py-2 text-xs font-bold uppercase tracking-widest text-muted hover:text-paper"
+                  >
+                    {uploading ? "Uploading…" : "Upload .stl / .zip"}
+                  </label>
+                </div>
+              </div>
             </Field>
             <Field label="Tagline (modal)">
               <input
