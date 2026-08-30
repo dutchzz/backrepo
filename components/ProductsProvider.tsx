@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { PRODUCTS, type Product } from "@/lib/products";
+import { loadResource, saveResource } from "@/lib/remoteStore";
 
 const PRODUCTS_KEY = "br-products";
 
@@ -21,7 +22,7 @@ type ProductsContextValue = {
 
 const ProductsContext = createContext<ProductsContextValue | null>(null);
 
-function load(): Product[] {
+function loadLocal(): Product[] {
   if (typeof window === "undefined") return PRODUCTS;
   try {
     const raw = window.localStorage.getItem(PRODUCTS_KEY);
@@ -37,12 +38,29 @@ export function ProductsProvider({ children }: { children: ReactNode }) {
   const [products, setProducts] = useState<Product[]>(PRODUCTS);
 
   useEffect(() => {
-    setProducts(load());
+    let cancelled = false;
+    (async () => {
+      const d = await loadResource<Product[]>("products");
+      if (cancelled) return;
+      if (d.configured && d.value) {
+        setProducts(d.value);
+        window.localStorage.setItem(PRODUCTS_KEY, JSON.stringify(d.value));
+      } else if (d.configured && !d.value) {
+        saveResource("products", PRODUCTS);
+        window.localStorage.setItem(PRODUCTS_KEY, JSON.stringify(PRODUCTS));
+      } else {
+        setProducts(loadLocal());
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const persist = (next: Product[]) => {
     setProducts(next);
     window.localStorage.setItem(PRODUCTS_KEY, JSON.stringify(next));
+    saveResource("products", next);
   };
 
   const add = (p: Omit<Product, "id">) => {
@@ -53,8 +71,7 @@ export function ProductsProvider({ children }: { children: ReactNode }) {
   const update = (id: string, patch: Partial<Product>) =>
     persist(products.map((p) => (p.id === id ? { ...p, ...patch } : p)));
 
-  const remove = (id: string) =>
-    persist(products.filter((p) => p.id !== id));
+  const remove = (id: string) => persist(products.filter((p) => p.id !== id));
 
   const reset = () => persist(PRODUCTS);
 
@@ -67,7 +84,6 @@ export function ProductsProvider({ children }: { children: ReactNode }) {
 
 export function useProducts() {
   const ctx = useContext(ProductsContext);
-  if (!ctx)
-    throw new Error("useProducts must be used within ProductsProvider");
+  if (!ctx) throw new Error("useProducts must be used within ProductsProvider");
   return ctx;
 }

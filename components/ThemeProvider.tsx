@@ -13,6 +13,7 @@ import {
   getTheme,
   type Palette,
 } from "@/lib/themes";
+import { loadResource, saveResource } from "@/lib/remoteStore";
 
 const THEME_KEY = "br-theme";
 
@@ -28,19 +29,39 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [themeId, setThemeIdState] = useState<string>(DEFAULT_THEME_ID);
 
   useEffect(() => {
-    const stored =
-      typeof window !== "undefined"
-        ? window.localStorage.getItem(THEME_KEY)
-        : null;
-    const id = stored || DEFAULT_THEME_ID;
-    setThemeIdState(id);
-    applyThemeVars(getTheme(id));
+    let cancelled = false;
+    (async () => {
+      const d = await loadResource<string>("theme");
+      if (cancelled) return;
+      const localId =
+        typeof window !== "undefined"
+          ? window.localStorage.getItem(THEME_KEY)
+          : null;
+      if (d.configured && d.value) {
+        setThemeIdState(d.value);
+        applyThemeVars(getTheme(d.value));
+        window.localStorage.setItem(THEME_KEY, d.value);
+      } else if (d.configured && !d.value) {
+        saveResource("theme", DEFAULT_THEME_ID);
+        if (localId) {
+          setThemeIdState(localId);
+          applyThemeVars(getTheme(localId));
+        }
+      } else if (localId) {
+        setThemeIdState(localId);
+        applyThemeVars(getTheme(localId));
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const setThemeId = (id: string) => {
     setThemeIdState(id);
     applyThemeVars(getTheme(id));
     window.localStorage.setItem(THEME_KEY, id);
+    saveResource("theme", id);
   };
 
   return (

@@ -7,6 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { loadResource, saveResource } from "@/lib/remoteStore";
 
 export type SiteSettings = {
   brand: string;
@@ -34,7 +35,7 @@ type SettingsContextValue = {
 
 const SettingsContext = createContext<SettingsContextValue | null>(null);
 
-function load(): SiteSettings {
+function loadLocal(): SiteSettings {
   if (typeof window === "undefined") return DEFAULTS;
   try {
     const raw = window.localStorage.getItem(SETTINGS_KEY);
@@ -49,13 +50,30 @@ export function SiteSettingsProvider({ children }: { children: ReactNode }) {
   const [settings, setSettings] = useState<SiteSettings>(DEFAULTS);
 
   useEffect(() => {
-    setSettings(load());
+    let cancelled = false;
+    (async () => {
+      const d = await loadResource<SiteSettings>("settings");
+      if (cancelled) return;
+      if (d.configured && d.value) {
+        setSettings({ ...DEFAULTS, ...d.value });
+        window.localStorage.setItem(SETTINGS_KEY, JSON.stringify(d.value));
+      } else if (d.configured && !d.value) {
+        saveResource("settings", DEFAULTS);
+        window.localStorage.setItem(SETTINGS_KEY, JSON.stringify(DEFAULTS));
+      } else {
+        setSettings(loadLocal());
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const update = (patch: Partial<SiteSettings>) => {
     setSettings((prev) => {
       const next = { ...prev, ...patch };
       window.localStorage.setItem(SETTINGS_KEY, JSON.stringify(next));
+      saveResource("settings", next);
       return next;
     });
   };
@@ -63,6 +81,7 @@ export function SiteSettingsProvider({ children }: { children: ReactNode }) {
   const reset = () => {
     setSettings(DEFAULTS);
     window.localStorage.setItem(SETTINGS_KEY, JSON.stringify(DEFAULTS));
+    saveResource("settings", DEFAULTS);
   };
 
   return (
