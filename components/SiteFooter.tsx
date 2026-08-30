@@ -6,21 +6,28 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-line">
       <div className="mx-auto max-w-content px-6 py-12">
-        <p className="max-w-2xl text-xs leading-relaxed text-muted">
-          {settings.footerDisclaimer}
-        </p>
-        <nav className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-xs uppercase tracking-widest text-muted">
-          <a href="/legal/terms" className="hover:text-paper">
-            Terms of Service
-          </a>
-          <a href="/legal/disclaimer" className="hover:text-paper">
-            Legal Disclaimer
-          </a>
-          <a href="/legal/privacy" className="hover:text-paper">
-            Privacy Policy
-          </a>
-        </nav>
-        <p className="mt-8 text-[10px] uppercase tracking-widest text-line">
+        <div className="flex flex-wrap items-end justify-between gap-8">
+          <div className="max-w-xl">
+            <span className="br-wordmark text-xl tracking-tight text-brand-lime">
+              {settings.brand}
+            </span>
+            <p className="mt-4 text-xs leading-relaxed text-muted">
+              {settings.footerDisclaimer}
+            </p>
+          </div>
+          <nav className="flex flex-wrap gap-x-6 gap-y-2">
+            <a href="/legal/terms" className="br-tag text-muted hover:text-brand-lime">
+              Terms of Service
+            </a>
+            <a href="/legal/disclaimer" className="br-tag text-muted hover:text-brand-lime">
+              Legal Disclaimer
+            </a>
+            <a href="/legal/privacy" className="br-tag text-muted hover:text-brand-lime">
+              Privacy Policy
+            </a>
+          </nav>
+        </div>
+        <p className="br-mono mt-10 text-[10px] uppercase tracking-widest text-line">
           © {new Date().getFullYear()} {settings.brand} — Digital Assets Only
         </p>
       </div>

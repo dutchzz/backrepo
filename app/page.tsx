@@ -17,7 +17,7 @@ export default function Home() {
       <SiteHeader />
       <main>
         <section className="mx-auto max-w-content px-6 pt-24">
-          <h1 className="whitespace-pre-line text-4xl font-extrabold leading-[0.95] tracking-tightest text-paper md:text-6xl">
+          <h1 className="br-heading whitespace-pre-line text-4xl leading-[0.95] text-paper md:text-6xl">
             {settings.heroTitle}
           </h1>
           <p className="mt-6 max-w-xl text-sm leading-relaxed text-muted">
@@ -25,7 +25,7 @@ export default function Home() {
           </p>
           <a
             href="/admin"
-            className="mt-6 inline-block text-xs uppercase tracking-widest text-muted hover:text-paper"
+            className="mt-6 inline-block text-xs uppercase tracking-widest text-muted hover:text-brand-lime"
           >
             Admin →
           </a>

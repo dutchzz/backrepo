@@ -84,12 +84,10 @@ export function CashAppCheckout() {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/90 px-6">
       <div className="w-full max-w-md border border-line bg-ink p-8">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-extrabold tracking-tightest text-paper">
-            Checkout
-          </h2>
+          <h2 className="br-heading text-lg text-paper">Checkout</h2>
           <button
             onClick={closeCheckout}
-            className="text-xs uppercase tracking-widest text-muted hover:text-paper"
+            className="br-tag text-muted hover:text-brand-lime"
           >
             Close
           </button>
@@ -101,15 +99,15 @@ export function CashAppCheckout() {
               key={i.id}
               className="flex justify-between text-sm text-muted"
             >
-              <span className="text-paper">{i.name}</span>
-              <span>${i.priceUsd}</span>
+              <span className="br-mono text-paper">{i.name}</span>
+              <span className="br-mono">${i.priceUsd}</span>
             </li>
           ))}
         </ul>
 
         <div className="mt-4 flex justify-between text-sm font-bold text-paper">
           <span>Total</span>
-          <span>${subtotal}</span>
+          <span className="br-mono">${subtotal}</span>
         </div>
 
         <p className="mt-4 text-[11px] leading-relaxed text-muted">
@@ -121,7 +119,7 @@ export function CashAppCheckout() {
           <button
             onClick={handleCheckout}
             disabled={status === "processing"}
-            className="mt-6 w-full bg-paper py-3 text-sm font-bold uppercase tracking-widest text-ink transition hover:bg-muted disabled:opacity-50"
+            className="mt-6 w-full bg-brand-lime py-3 text-sm font-bold uppercase tracking-widest text-brand-ink transition hover:opacity-90 disabled:opacity-50"
           >
             {status === "processing" ? "Processing…" : "Pay with Cash App"}
           </button>
@@ -130,7 +128,7 @@ export function CashAppCheckout() {
         {result?.mode === "fallback" && status !== "done" && (
           <button
             onClick={confirmFallbackPaid}
-            className="mt-3 w-full border border-line py-3 text-xs font-bold uppercase tracking-widest text-muted hover:text-paper"
+            className="mt-3 w-full border border-line py-3 text-xs font-bold uppercase tracking-widest text-muted hover:text-brand-lime"
           >
             I&apos;ve paid — confirm order
           </button>

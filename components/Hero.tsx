@@ -15,11 +15,11 @@ export function Hero() {
   return (
     <section
       aria-label="Intro"
-      className={`fixed inset-0 z-40 flex items-center justify-center bg-ink transition-opacity duration-700 ${
+      className={`fixed inset-0 z-40 flex items-center justify-center bg-brand-ink transition-opacity duration-700 ${
         hidden ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
     >
-      <h1 className="animate-rise px-4 text-center text-[18vw] font-extrabold leading-[0.9] tracking-tightest text-paper md:text-[16rem]">
+      <h1 className="br-wordmark animate-rise px-4 text-center text-[18vw] leading-[0.9] text-brand-lime md:text-[16rem]">
         {settings.brand.toUpperCase()}
       </h1>
     </section>

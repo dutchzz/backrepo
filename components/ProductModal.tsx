@@ -2,7 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { useCart } from "./CartProvider";
-import { productGallery, type Product } from "@/lib/products";
+import {
+  productGallery,
+  productCategory,
+  CATEGORY_META,
+  type Product,
+} from "@/lib/products";
 
 export function ProductModal({
   product,
@@ -15,6 +20,8 @@ export function ProductModal({
   const isFree = product.priceUsd === 0;
   const gallery = productGallery(product);
   const [active, setActive] = useState(0);
+  const cat = productCategory(product);
+  const catMeta = CATEGORY_META[cat];
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -30,7 +37,7 @@ export function ProductModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/90 px-6"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-brand-ink/90 px-6"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -38,16 +45,12 @@ export function ProductModal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`relative w-full max-w-lg border bg-ink ${
-          product.highlight
-            ? "border-accent shadow-[0_0_0_1px_rgb(var(--c-accent))]"
-            : "border-line"
-        }`}
+        className="relative w-full max-w-lg border border-line bg-ink"
       >
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-3 top-3 z-10 text-xs uppercase tracking-widest text-muted hover:text-paper"
+          className="br-tag absolute right-3 top-3 z-10 text-muted hover:text-brand-lime"
         >
           Close
         </button>
@@ -61,7 +64,7 @@ export function ProductModal({
               className="h-full w-full object-cover"
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center text-[10px] uppercase tracking-[0.2em] text-muted">
+            <div className="flex h-full w-full items-center justify-center br-tag text-muted">
               No image
             </div>
           )}
@@ -74,7 +77,7 @@ export function ProductModal({
                 key={i}
                 onClick={() => setActive(i)}
                 className={`h-14 w-20 overflow-hidden border ${
-                  i === active ? "border-accent" : "border-line"
+                  i === active ? "border-brand-lime" : "border-line"
                 }`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -89,19 +92,21 @@ export function ProductModal({
         )}
 
         <div className="p-8">
-          {product.highlight && (
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
-              Premium
+          <div className="flex items-center gap-3">
+            <span
+              className="br-tag"
+              style={{ color: `rgb(var(--cat-${catMeta.color}))` }}
+            >
+              {catMeta.label}
             </span>
-          )}
+            {product.highlight && (
+              <span className="br-tag text-brand-magenta">Premium</span>
+            )}
+          </div>
           {product.tagline && (
-            <p className="mt-2 text-xs uppercase tracking-widest text-muted">
-              {product.tagline}
-            </p>
+            <p className="mt-3 br-tag text-muted">{product.tagline}</p>
           )}
-          <h2 className="mt-1 text-3xl font-extrabold tracking-tightest text-paper">
-            {product.name}
-          </h2>
+          <h2 className="br-heading mt-1 text-3xl text-paper">{product.name}</h2>
           <p className="mt-3 text-sm leading-relaxed text-muted">
             {product.details || product.summary}
           </p>
@@ -109,11 +114,8 @@ export function ProductModal({
           {product.features && product.features.length > 0 && (
             <ul className="mt-6 space-y-2 border-t border-line pt-6">
               {product.features.map((f, i) => (
-                <li
-                  key={i}
-                  className="flex items-center gap-3 text-sm text-paper"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                <li key={i} className="flex items-center gap-3 text-sm text-paper">
+                  <span className="h-1.5 w-1.5 rounded-full bg-brand-lime" />
                   {f}
                 </li>
               ))}
@@ -121,7 +123,7 @@ export function ProductModal({
           )}
 
           <div className="mt-8 flex items-center justify-between">
-            <span className="text-2xl font-extrabold text-paper">
+            <span className="br-mono text-2xl font-medium text-paper">
               {isFree ? "Free" : `$${product.priceUsd}`}
             </span>
 
@@ -130,19 +132,17 @@ export function ProductModal({
                 <a
                   href={product.fileUrl}
                   download
-                  className="bg-accent px-6 py-3 text-xs font-bold uppercase tracking-widest text-ink transition hover:opacity-90"
+                  className="bg-brand-cyan px-6 py-3 text-xs font-bold uppercase tracking-widest text-brand-ink transition hover:opacity-90"
                 >
                   Download
                 </a>
               ) : (
-                <span className="text-xs uppercase tracking-widest text-muted">
-                  No file
-                </span>
+                <span className="br-tag text-muted">No file</span>
               )
             ) : (
               <button
                 onClick={addToCart}
-                className="bg-paper px-6 py-3 text-xs font-bold uppercase tracking-widest text-ink transition hover:bg-muted"
+                className="bg-brand-lime px-6 py-3 text-xs font-bold uppercase tracking-widest text-brand-ink transition hover:opacity-90"
               >
                 Add to cart
               </button>

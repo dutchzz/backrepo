@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { fontDisplay, fontBody, fontMono } from "./fonts";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SiteSettingsProvider } from "@/components/SiteSettingsProvider";
 import { ProductsProvider } from "@/components/ProductsProvider";
@@ -18,7 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}
+    >
       <body>
         <ThemeProvider>
           <SiteSettingsProvider>

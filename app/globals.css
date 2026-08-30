@@ -8,6 +8,18 @@
   --c-muted: 120 120 30;
   --c-line: 44 44 0;
   --c-accent: 255 0 170;
+
+  --brand-lime: 204 255 0;
+  --brand-magenta: 255 0 170;
+  --brand-cyan: 0 240 255;
+  --brand-amber: 255 179 0;
+  --brand-ink: 10 10 10;
+  --brand-paper: 245 245 245;
+
+  --cat-standard: var(--brand-lime);
+  --cat-premium: var(--brand-magenta);
+  --cat-bundle: var(--brand-amber);
+  --cat-free: var(--brand-cyan);
 }
 
 html,
@@ -16,9 +28,9 @@ body {
 }
 
 body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: "Helvetica Neue", Arial, system-ui, sans-serif;
+  background: rgb(var(--c-bg));
+  color: rgb(var(--c-fg));
+  font-family: var(--font-body), "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -42,4 +54,31 @@ body {
 
 .animate-rise {
   animation: rise 1s ease forwards;
+}
+
+@layer components {
+  .br-wordmark {
+    font-family: var(--font-display), "Space Grotesk", system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+
+  .br-mono {
+    font-family: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
+    letter-spacing: 0.02em;
+  }
+
+  .br-heading {
+    font-family: var(--font-display), "Space Grotesk", system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .br-tag {
+    font-family: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
 }

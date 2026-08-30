@@ -5,6 +5,8 @@ import { useTheme } from "@/components/ThemeProvider";
 import { useProducts } from "@/components/ProductsProvider";
 import { useSiteSettings, DEFAULTS } from "@/components/SiteSettingsProvider";
 import { THEMES, type Palette } from "@/lib/themes";
+import type { ProductCategory } from "@/lib/products";
+import { CATEGORY_META } from "@/lib/products";
 
 type Tab = "theme" | "products" | "content";
 
@@ -15,7 +17,7 @@ export default function AdminPage() {
     <div className="min-h-screen">
       <header className="border-b border-line">
         <div className="mx-auto flex max-w-content items-center justify-between px-6 py-4">
-          <h1 className="text-sm font-extrabold uppercase tracking-widest text-paper">
+          <h1 className="br-wordmark text-lg tracking-tight text-brand-lime">
             Admin
           </h1>
           <a
@@ -32,9 +34,9 @@ export default function AdminPage() {
           <button
             key={t}
             onClick={() => setTab(t)}
-            className={`border-b-2 px-3 py-2 ${
+            className={`border-b-2 px-3 py-2 br-tag ${
               tab === t
-                ? "border-accent text-paper"
+                ? "border-brand-lime text-brand-lime"
                 : "border-transparent text-muted hover:text-paper"
             }`}
           >
@@ -71,17 +73,17 @@ function ThemePanel() {
             onClick={() => setThemeId(theme.id)}
             className={`overflow-hidden rounded border text-left transition ${
               themeId === theme.id
-                ? "border-accent"
+                ? "border-brand-lime"
                 : "border-line hover:border-muted"
             }`}
           >
             <SwatchPreview theme={theme} />
             <div className="flex items-center justify-between px-4 py-3">
-              <span className="text-sm font-bold uppercase tracking-widest text-paper">
+              <span className="br-tag text-paper">
                 {theme.name}
               </span>
               {themeId === theme.id && (
-                <span className="text-[10px] uppercase tracking-widest text-accent">
+                <span className="br-tag text-brand-lime">
                   Active
                 </span>
               )}
@@ -103,7 +105,7 @@ function SwatchPreview({ theme }: { theme: Palette }) {
       }}
     >
       <span
-        className="text-lg font-extrabold uppercase tracking-tightest"
+        className="br-wordmark text-lg uppercase"
         style={{ color: `rgb(${theme.fg})` }}
       >
         Aa
@@ -129,6 +131,7 @@ function ProductsPanel() {
   const [tagline, setTagline] = useState("");
   const [details, setDetails] = useState("");
   const [features, setFeatures] = useState("");
+  const [category, setCategory] = useState<ProductCategory>("standard");
   const [highlight, setHighlight] = useState(false);
   const [uploading, setUploading] = useState(false);
 
@@ -145,6 +148,7 @@ function ProductsPanel() {
     setTagline(p.tagline ?? "");
     setDetails(p.details ?? "");
     setFeatures((p.features ?? []).join(", "));
+    setCategory(p.category ?? (p.priceUsd === 0 ? "free" : "standard"));
     setHighlight(p.highlight ?? false);
   };
 
@@ -182,7 +186,7 @@ function ProductsPanel() {
           .split(",")
           .map((f) => f.trim())
           .filter(Boolean),
-        highlight,
+        category,
       };
     if (editingId) {
       update(editingId, payload);
@@ -204,6 +208,7 @@ function ProductsPanel() {
     setTagline("");
     setDetails("");
     setFeatures("");
+    setCategory("standard");
     setHighlight(false);
   };
 
@@ -413,6 +418,19 @@ function ProductsPanel() {
               />
               Premium (adds accent border + Premium badge)
             </label>
+            <Field label="Category">
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value as ProductCategory)}
+                className="w-full border border-line bg-ink px-3 py-2 text-sm text-paper outline-none focus:border-accent"
+              >
+                {(Object.keys(CATEGORY_META) as ProductCategory[]).map((c) => (
+                  <option key={c} value={c}>
+                    {CATEGORY_META[c].label}
+                  </option>
+                ))}
+              </select>
+            </Field>
             <div className="grid grid-cols-2 gap-4">
               <Field label="Price (USD)">
                 <input

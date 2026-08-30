@@ -27,7 +27,7 @@ export function AgeGate() {
       className="fixed inset-0 z-50 flex items-center justify-center bg-ink/95 px-6"
     >
       <div className="max-w-md text-center">
-        <h2 className="text-2xl font-extrabold tracking-tightest text-paper">
+        <h2 className="br-heading text-2xl text-brand-lime">
           Age Verification
         </h2>
         <p className="mt-4 text-sm leading-relaxed text-muted">
@@ -39,13 +39,13 @@ export function AgeGate() {
         <div className="mt-8 flex flex-col gap-3">
           <button
             onClick={confirm}
-            className="w-full bg-paper py-3 text-sm font-bold uppercase tracking-widest text-ink transition hover:bg-muted"
+            className="w-full bg-brand-lime py-3 text-sm font-bold uppercase tracking-widest text-brand-ink transition hover:opacity-90"
           >
             I am 18 or older — Enter
           </button>
           <button
             onClick={() => (window.location.href = "https://example.com")}
-            className="w-full border border-line py-3 text-sm font-bold uppercase tracking-widest text-muted transition hover:text-paper"
+            className="w-full border border-line py-3 text-sm font-bold uppercase tracking-widest text-muted transition hover:text-brand-lime"
           >
             Leave
           </button>

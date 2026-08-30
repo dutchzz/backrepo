@@ -14,14 +14,12 @@ export function ProductGrid() {
     <section id="files" className="mx-auto max-w-content px-6 py-24">
       <div className="mb-12 flex items-end justify-between border-b border-line pb-6">
         <div>
-          <h2 className="text-3xl font-extrabold tracking-tightest text-paper">
-            STL Files
-          </h2>
+          <h2 className="br-heading text-3xl text-paper">STL Files</h2>
           <p className="mt-2 text-sm text-muted">
             Digital downloads. No physical items are shipped.
           </p>
         </div>
-        <span className="hidden text-xs uppercase tracking-widest text-muted sm:block">
+        <span className="br-mono hidden text-xs uppercase tracking-widest text-muted sm:block">
           {products.length} designs
         </span>
       </div>

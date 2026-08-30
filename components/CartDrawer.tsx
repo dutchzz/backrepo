@@ -20,12 +20,10 @@ export function CartDrawer() {
         aria-hidden={!isOpen}
       >
         <div className="flex items-center justify-between border-b border-line p-6">
-          <h2 className="text-lg font-extrabold tracking-tightest text-paper">
-            Cart
-          </h2>
+          <h2 className="br-heading text-lg text-paper">Cart</h2>
           <button
             onClick={close}
-            className="text-xs uppercase tracking-widest text-muted hover:text-paper"
+            className="br-tag text-muted hover:text-brand-lime"
           >
             Close
           </button>
@@ -42,11 +40,11 @@ export function CartDrawer() {
               >
                 <div>
                   <p className="text-sm text-paper">{i.name}</p>
-                  <p className="text-xs text-muted">${i.priceUsd}</p>
+                  <p className="br-mono text-xs text-muted">${i.priceUsd}</p>
                 </div>
                 <button
                   onClick={() => remove(i.id)}
-                  className="text-xs uppercase tracking-widest text-muted hover:text-paper"
+                  className="br-tag text-muted hover:text-brand-lime"
                 >
                   Remove
                 </button>
@@ -59,11 +57,11 @@ export function CartDrawer() {
           <div className="border-t border-line p-6">
             <div className="mb-4 flex justify-between text-sm font-bold text-paper">
               <span>Total</span>
-              <span>${subtotal}</span>
+              <span className="br-mono">${subtotal}</span>
             </div>
             <button
               onClick={openCheckout}
-              className="w-full bg-paper py-3 text-sm font-bold uppercase tracking-widest text-ink transition hover:bg-muted"
+              className="w-full bg-brand-lime py-3 text-sm font-bold uppercase tracking-widest text-brand-ink transition hover:opacity-90"
             >
               Checkout — Cash App
             </button>
