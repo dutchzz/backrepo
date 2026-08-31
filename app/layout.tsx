@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   title: "BACK REPO — Digital STL Files",
   description:
     "Digital STL design files for 3D printing. Digital assets only — no physical goods sold.",
+  metadataBase: new URL("https://backrepo-liart.vercel.app"),
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({

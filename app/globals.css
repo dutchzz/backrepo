@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --c-bg: 10 10 10;
-  --c-fg: 204 255 0;
-  --c-muted: 120 120 30;
-  --c-line: 44 44 0;
-  --c-accent: 255 0 170;
+  --c-bg: 15 18 22;
+  --c-fg: 226 232 240;
+  --c-muted: 100 116 139;
+  --c-line: 51 65 85;
+  --c-accent: 99 102 241;
 
   --brand-lime: 204 255 0;
   --brand-magenta: 255 0 170;
