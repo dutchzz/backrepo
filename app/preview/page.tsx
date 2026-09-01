@@ -19,7 +19,7 @@ type OptionId = (typeof OPTIONS)[number]["id"];
 
 export default function PreviewPage() {
   const [selected, setSelected] = useState<OptionId>("amber");
-  const Active = OPTIONS.find((o) => o.id === selected)!.component;
+  const Active = OPTIONS.find((o) => o.id === selected)?.component ?? OPTIONS[0].component;
 
   return (
     <div style={{ minHeight: "100vh", background: "#0b0d12", color: "#fff" }}>
