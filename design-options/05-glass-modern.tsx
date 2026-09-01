@@ -7,77 +7,57 @@ const PRODUCTS = [
 
 export default function GlassModern() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
-      <header className="sticky top-0 z-30 border-b border-white/10 bg-white/5 backdrop-blur-xl">
-        <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
-          <h1 className="text-lg font-semibold tracking-tight">
-            Back Repo
-          </h1>
-          <nav className="flex gap-6 text-xs uppercase tracking-widest text-white/60">
-            <a href="#" className="hover:text-white transition">Files</a>
-            <a href="#" className="hover:text-white transition">Legal</a>
+    <div style={{ minHeight: "100vh", background: "linear-gradient(135deg, #0f172a, #581c87, #0f172a)", color: "#ffffff" }}>
+      <header style={{ position: "sticky", top: 0, zIndex: 30, borderBottom: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.05)", backdropFilter: "blur(16px)" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "16px 24px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <h1 style={{ fontSize: "18px", fontWeight: 600, letterSpacing: "-0.01em" }}>Back Repo</h1>
+          <nav style={{ display: "flex", gap: "24px", fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.15em", color: "rgba(255,255,255,0.6)" }}>
+            <a href="#" style={{ color: "#fff", textDecoration: "none" }}>Files</a>
+            <a href="#" style={{ color: "#fff", textDecoration: "none" }}>Legal</a>
           </nav>
         </div>
       </header>
 
-      <section className="px-6 py-32">
-        <div className="mx-auto max-w-6xl">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-12 backdrop-blur-xl">
-            <h2 className="text-5xl md:text-6xl font-bold leading-tight tracking-tight">
+      <section style={{ padding: "128px 24px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ borderRadius: "16px", border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.05)", backdropFilter: "blur(16px)", padding: "48px" }}>
+            <h2 style={{ fontSize: "clamp(40px, 6vw, 72px)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.02em" }}>
               Digital STL files for 3D-printed components.
             </h2>
-            <p className="mt-6 max-w-xl text-sm leading-relaxed text-white/60">
-              A clean catalog of downloadable design geometry. Digital assets
-              only — nothing physical is sold or shipped. Checkout via Cash App.
+            <p style={{ marginTop: "24px", maxWidth: "560px", fontSize: "14px", lineHeight: 1.6, color: "rgba(255,255,255,0.6)" }}>
+              A clean catalog of downloadable design geometry. Digital assets only — nothing physical is sold or shipped. Checkout via Cash App.
             </p>
-            <div className="mt-8 flex gap-4">
-              <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs">
-                {PRODUCTS.length} designs
-              </span>
-              <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs">
-                Digital only
-              </span>
+            <div style={{ marginTop: "32px", display: "flex", gap: "16px", flexWrap: "wrap" }}>
+              <span style={{ borderRadius: "9999px", border: "1px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.1)", padding: "8px 16px", fontSize: "12px" }}>{PRODUCTS.length} designs</span>
+              <span style={{ borderRadius: "9999px", border: "1px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.1)", padding: "8px 16px", fontSize: "12px" }}>Digital only</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="px-6 py-24">
-        <div className="mx-auto max-w-6xl">
-          <h3 className="text-xs uppercase tracking-widest text-white/40 mb-8">
-            Catalog
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <section style={{ padding: "96px 24px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <h3 style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.2em", color: "rgba(255,255,255,0.4)", marginBottom: "32px" }}>Catalog</h3>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "24px" }}>
             {PRODUCTS.map((p) => (
-              <div
-                key={p.name}
-                className="group cursor-pointer rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition hover:border-white/20 hover:bg-white/10"
-              >
-                <div className="aspect-[4/3] rounded-xl bg-white/5 mb-4 flex items-center justify-center text-xs text-white/40">
-                  No image
-                </div>
-                <span className="text-xs uppercase tracking-widest text-white/40">
-                  {p.category}
-                </span>
-                <h4 className="text-lg font-semibold mt-2">{p.name}</h4>
-                <p className="mt-2 text-sm text-white/60">{p.price}</p>
-                <button className="mt-4 w-full rounded-xl bg-white py-2 text-xs font-bold uppercase tracking-widest text-slate-900 transition hover:bg-white/90">
-                  Add to cart
-                </button>
+              <div key={p.name} style={{ cursor: "pointer", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.05)", padding: "24px", transition: "background 0.2s, border-color 0.2s" }}>
+                <div style={{ aspectRatio: "4/3", borderRadius: "12px", background: "rgba(255,255,255,0.05)", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", color: "rgba(255,255,255,0.4)" }}>No image</div>
+                <span style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.15em", color: "rgba(255,255,255,0.4)" }}>{p.category}</span>
+                <h4 style={{ fontSize: "18px", fontWeight: 600, marginTop: "8px" }}>{p.name}</h4>
+                <p style={{ marginTop: "8px", fontSize: "14px", color: "rgba(255,255,255,0.6)" }}>{p.price}</p>
+                <button style={{ marginTop: "16px", width: "100%", borderRadius: "12px", background: "#fff", padding: "10px", fontSize: "12px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: "#0f172a", border: "none", cursor: "pointer" }}>Add to cart</button>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <footer className="border-t border-white/10 px-6 py-12">
-        <div className="mx-auto max-w-6xl flex items-center justify-between">
-          <span className="text-xs text-white/40">
-            © 2026 Back Repo — Digital Assets Only
-          </span>
-          <div className="flex gap-6 text-xs uppercase tracking-widest text-white/40">
-            <a href="#" className="hover:text-white transition">Terms</a>
-            <a href="#" className="hover:text-white transition">Privacy</a>
+      <footer style={{ borderTop: "1px solid rgba(255,255,255,0.1)", padding: "48px 24px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", justifyContent: "space-between", fontSize: "12px", color: "rgba(255,255,255,0.5)" }}>
+          <span>© 2026 Back Repo — Digital Assets Only</span>
+          <div style={{ display: "flex", gap: "24px", textTransform: "uppercase", letterSpacing: "0.15em" }}>
+            <a href="#" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Terms</a>
+            <a href="#" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Privacy</a>
           </div>
         </div>
       </footer>

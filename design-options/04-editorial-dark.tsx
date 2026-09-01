@@ -7,74 +7,59 @@ const PRODUCTS = [
 
 export default function EditorialDark() {
   return (
-    <div className="min-h-screen bg-[#0f1115] text-[#e6e8ec]">
-      <header className="border-b border-[#2a2f3a]">
-        <div className="mx-auto max-w-6xl px-6 py-6 flex items-center justify-between">
-          <h1 className="text-lg font-serif tracking-tight">
-            Back Repo
-          </h1>
-          <nav className="flex gap-8 text-xs uppercase tracking-widest text-[#6b7280]">
-            <a href="#" className="hover:text-white transition">Files</a>
-            <a href="#" className="hover:text-white transition">Legal</a>
+    <div style={{ minHeight: "100vh", background: "#0f1115", color: "#e6e8ec" }}>
+      <header style={{ borderBottom: "1px solid #2a2f3a" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "24px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <h1 style={{ fontSize: "18px", fontFamily: 'Georgia, "Times New Roman", serif', letterSpacing: "-0.01em" }}>Back Repo</h1>
+          <nav style={{ display: "flex", gap: "32px", fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.2em", color: "#6b7280" }}>
+            <a href="#" style={{ color: "#fff", textDecoration: "none" }}>Files</a>
+            <a href="#" style={{ color: "#fff", textDecoration: "none" }}>Legal</a>
           </nav>
         </div>
       </header>
 
-      <section className="px-6 py-32">
-        <div className="mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-12 gap-8">
-          <div className="md:col-span-8">
-            <h2 className="text-5xl md:text-7xl font-serif leading-[0.95] tracking-tight">
+      <section style={{ padding: "128px 24px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "32px" }}>
+          <div style={{ gridColumn: "span 2" }}>
+            <h2 style={{ fontSize: "clamp(40px, 7vw, 80px)", fontFamily: 'Georgia, "Times New Roman", serif', lineHeight: 0.95, letterSpacing: "-0.02em" }}>
               Digital STL files for 3D-printed components.
             </h2>
           </div>
-          <div className="md:col-span-4 md:pt-4">
-            <p className="text-sm leading-relaxed text-[#6b7280]">
-              A clean catalog of downloadable design geometry. Digital assets
-              only — nothing physical is sold or shipped. Checkout via Cash App.
+          <div>
+            <p style={{ fontSize: "14px", lineHeight: 1.6, color: "#6b7280" }}>
+              A clean catalog of downloadable design geometry. Digital assets only — nothing physical is sold or shipped. Checkout via Cash App.
             </p>
-            <div className="mt-6 w-16 h-px bg-[#ef4444]" />
-            <p className="mt-4 text-xs text-[#6b7280]">
-              {PRODUCTS.length} designs available
-            </p>
+            <div style={{ marginTop: "24px", width: "64px", height: "1px", background: "#ef4444" }} />
+            <p style={{ marginTop: "16px", fontSize: "12px", color: "#6b7280" }}>{PRODUCTS.length} designs available</p>
           </div>
         </div>
       </section>
 
-      <section className="px-6 py-24">
-        <div className="mx-auto max-w-6xl">
-          <div className="flex items-end justify-between mb-12 pb-6 border-b border-[#2a2f3a]">
-            <h3 className="text-xs uppercase tracking-widest text-[#6b7280]">
-              Catalog
-            </h3>
+      <section style={{ padding: "96px 24px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: "48px", paddingBottom: "24px", borderBottom: "1px solid #2a2f3a" }}>
+            <h3 style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.2em", color: "#6b7280" }}>Catalog</h3>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "32px" }}>
             {PRODUCTS.map((p) => (
-              <div key={p.name} className="group cursor-pointer">
-                <div className="aspect-[4/3] bg-[#1a1d24] mb-4 flex items-center justify-center text-xs text-[#6b7280]">
-                  No image
-                </div>
-                <span className="text-xs uppercase tracking-widest text-[#ef4444]">
-                  {p.category}
-                </span>
-                <h4 className="text-xl font-serif mt-2">{p.name}</h4>
-                <p className="mt-2 text-sm text-[#6b7280]">{p.price}</p>
-                <button className="mt-4 text-xs uppercase tracking-widest border-b border-[#ef4444] pb-1 text-[#ef4444] hover:text-white hover:border-white transition">
-                  Add to cart
-                </button>
+              <div key={p.name}>
+                <div style={{ aspectRatio: "4/3", background: "#1a1d24", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", color: "#6b7280" }}>No image</div>
+                <span style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.2em", color: "#ef4444" }}>{p.category}</span>
+                <h4 style={{ fontSize: "20px", fontFamily: 'Georgia, "Times New Roman", serif', marginTop: "8px" }}>{p.name}</h4>
+                <p style={{ marginTop: "8px", fontSize: "14px", color: "#6b7280" }}>{p.price}</p>
+                <button style={{ marginTop: "16px", fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.15em", background: "transparent", border: "none", borderBottom: "1px solid #ef4444", paddingBottom: "4px", color: "#ef4444", cursor: "pointer" }}>Add to cart</button>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <footer className="border-t border-[#2a2f3a] px-6 py-12">
-        <div className="mx-auto max-w-6xl flex items-center justify-between">
-          <span className="text-xs text-[#6b7280]">
-            © 2026 Back Repo — Digital Assets Only
-          </span>
-          <div className="flex gap-8 text-xs uppercase tracking-widest text-[#6b7280]">
-            <a href="#" className="hover:text-white transition">Terms</a>
-            <a href="#" className="hover:text-white transition">Privacy</a>
+      <footer style={{ borderTop: "1px solid #2a2f3a", padding: "48px 24px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", justifyContent: "space-between", fontSize: "12px", color: "#6b7280" }}>
+          <span>© 2026 Back Repo — Digital Assets Only</span>
+          <div style={{ display: "flex", gap: "32px", textTransform: "uppercase", letterSpacing: "0.2em" }}>
+            <a href="#" style={{ color: "#6b7280", textDecoration: "none" }}>Terms</a>
+            <a href="#" style={{ color: "#6b7280", textDecoration: "none" }}>Privacy</a>
           </div>
         </div>
       </footer>

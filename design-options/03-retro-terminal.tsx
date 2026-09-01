@@ -7,36 +7,31 @@ const PRODUCTS = [
 
 export default function RetroTerminal() {
   return (
-    <div className="min-h-screen bg-black text-green-400 font-mono text-sm">
-      <div className="pointer-events-none fixed inset-0 opacity-10" style={{
-        backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,0,0.15) 2px, rgba(0,255,0,0.15) 4px)'
-      }} />
+    <div style={{ minHeight: "100vh", background: "#000", color: "#4ade80", fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', fontSize: "14px" }}>
+      <div style={{ position: "fixed", inset: 0, pointerEvents: "none", opacity: 0.08, backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(74,222,128,0.25) 2px, rgba(74,222,128,0.25) 4px)' }} />
 
-      <header className="border-b border-green-900">
-        <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
-          <h1 className="text-base tracking-widest">
-            <span className="text-green-600">root@backrepo</span>:<span className="text-green-400">~</span>$
+      <header style={{ borderBottom: "1px solid #14532d" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "16px 24px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <h1 style={{ fontSize: "14px", letterSpacing: "0.15em" }}>
+            <span style={{ color: "#22c55e" }}>root@backrepo</span>:<span style={{ color: "#4ade80" }}>~</span>$
           </h1>
-          <nav className="flex gap-6 text-xs uppercase tracking-widest text-green-600">
-            <a href="#" className="hover:text-green-400 transition">files</a>
-            <a href="#" className="hover:text-green-400 transition">legal</a>
+          <nav style={{ display: "flex", gap: "24px", fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.15em", color: "#22c55e" }}>
+            <a href="#" style={{ color: "#22c55e", textDecoration: "none" }}>files</a>
+            <a href="#" style={{ color: "#22c55e", textDecoration: "none" }}>legal</a>
           </nav>
         </div>
       </header>
 
-      <section className="px-6 py-24">
-        <div className="mx-auto max-w-6xl">
-          <div className="text-green-600 text-xs uppercase tracking-widest mb-4">
-            ./init.sh
-          </div>
-          <h2 className="text-4xl md:text-6xl font-bold leading-tight">
+      <section style={{ padding: "96px 24px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.2em", color: "#22c55e", marginBottom: "16px" }}>./init.sh</div>
+          <h2 style={{ fontSize: "clamp(32px, 6vw, 64px)", fontWeight: 700, lineHeight: 1.1 }}>
             Digital STL files for 3D-printed components.
           </h2>
-          <p className="mt-6 max-w-2xl text-green-400/80 leading-relaxed">
-            A clean catalog of downloadable design geometry. Digital assets only —
-            nothing physical is sold or shipped. Checkout via Cash App.
+          <p style={{ marginTop: "24px", maxWidth: "720px", lineHeight: 1.6, color: "rgba(74,222,128,0.8)" }}>
+            A clean catalog of downloadable design geometry. Digital assets only — nothing physical is sold or shipped. Checkout via Cash App.
           </p>
-          <div className="mt-8 flex gap-6 text-xs text-green-600">
+          <div style={{ marginTop: "32px", display: "flex", gap: "24px", fontSize: "12px", color: "#22c55e" }}>
             <span>[ designs: {PRODUCTS.length} ]</span>
             <span>[ status: online ]</span>
             <span>[ payment: cashapp ]</span>
@@ -44,34 +39,28 @@ export default function RetroTerminal() {
         </div>
       </section>
 
-      <section className="px-6 py-24 border-t border-green-900">
-        <div className="mx-auto max-w-6xl">
-          <h3 className="text-xs uppercase tracking-widest text-green-600 mb-8">
-            ls -la ./catalog/
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-green-900/30">
+      <section style={{ padding: "96px 24px", borderTop: "1px solid #14532d" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <h3 style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.2em", color: "#22c55e", marginBottom: "32px" }}>ls -la ./catalog/</h3>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1px", background: "rgba(20,83,45,0.35)" }}>
             {PRODUCTS.map((p) => (
-              <div key={p.name} className="bg-black p-6 border border-green-900">
-                <span className="text-xs uppercase tracking-widest text-green-600">
-                  {p.category}
-                </span>
-                <h4 className="text-lg font-bold mt-2 text-green-400">{p.name}</h4>
-                <p className="mt-4 text-green-600">{p.price}</p>
-                <button className="mt-4 border border-green-600 px-4 py-2 text-xs font-bold uppercase tracking-widest text-green-400 hover:bg-green-900/30 transition">
-                  [ add ]
-                </button>
+              <div key={p.name} style={{ background: "#000", padding: "24px", border: "1px solid #14532d" }}>
+                <span style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.15em", color: "#22c55e" }}>{p.category}</span>
+                <h4 style={{ fontSize: "18px", fontWeight: 700, marginTop: "8px", color: "#4ade80" }}>{p.name}</h4>
+                <p style={{ marginTop: "16px", color: "#22c55e" }}>{p.price}</p>
+                <button style={{ marginTop: "16px", border: "1px solid #22c55e", padding: "8px 16px", fontSize: "12px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", background: "transparent", color: "#4ade80", cursor: "pointer" }}>[ add ]</button>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <footer className="border-t border-green-900 px-6 py-8">
-        <div className="mx-auto max-w-6xl flex items-center justify-between text-xs text-green-600">
+      <footer style={{ borderTop: "1px solid #14532d", padding: "32px 24px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", justifyContent: "space-between", fontSize: "12px", color: "#22c55e" }}>
           <span>© 2026 Back Repo — Digital Assets Only</span>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-green-400 transition">terms</a>
-            <a href="#" className="hover:text-green-400 transition">privacy</a>
+          <div style={{ display: "flex", gap: "24px", textTransform: "uppercase", letterSpacing: "0.15em" }}>
+            <a href="#" style={{ color: "#22c55e", textDecoration: "none" }}>terms</a>
+            <a href="#" style={{ color: "#22c55e", textDecoration: "none" }}>privacy</a>
           </div>
         </div>
       </footer>
